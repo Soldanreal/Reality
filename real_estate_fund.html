@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soldanreal Fond Realit - Stabilní výnosy z nemovitostí</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c5aa0;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2c5aa0;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #1e3a72;
+        }
+
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #2c5aa0, #1e3a72);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(44, 90, 160, 0.4);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(44, 90, 160, 0.6);
+        }
+
+        .stats-section {
+            background: white;
+            padding: 4rem 0;
+            margin-top: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e3a72 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .features-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, rgba(186, 159, 90, 0.9) 0%, rgba(152, 129, 70, 0.9) 100%);
+            color: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .investment-section {
+            background: white;
+            padding: 4rem 0;
+        }
+
+        .investment-calculator {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 240, 240, 0.95) 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            margin-top: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .calculator-input {
+            margin: 1rem;
+            padding: 1rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 10px;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .calculator-result {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2d3748;
+            margin-top: 1rem;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, rgba(44, 90, 160, 0.95) 0%, rgba(30, 58, 114, 0.95) 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .contact-form {
+            max-width: 500px;
+            margin: 2rem auto;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #ba9f5a, #987046);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(186, 159, 90, 0.4);
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#" class="logo">Soldanreal Fond Realit</a>
+            <ul class="nav-links">
+                <li><a href="#home">Domů</a></li>
+                <li><a href="#o-nas">O nás</a></li>
+                <li><a href="#investice">Investice</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Investujte do budoucnosti</h1>
+            <p>Garantované 4% ročně + dividendy dle výsledků fondu z profesionálně spravovaného portfolia nemovitostí</p>
+            <a href="#investice" class="cta-button">Začít investovat</a>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; color: #2d3748; margin-bottom: 1rem;">Naše úspěchy v číslech</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">4%+</div>
+                    <div class="stat-label">Garantovaný výnos + dividendy</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">60</div>
+                    <div class="stat-label">Bytů v portfoliu</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10</div>
+                    <div class="stat-label">Komerčních prostorů</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Let zkušeností</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Obsazenost bytů</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="o-nas" class="features-section">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem;">Proč investovat s námi?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🏢</div>
+                    <h3>Diverzifikované portfolio</h3>
+                    <p>60 bytů a 10 komerčních prostorů ve strategických lokalitách s vysokou poptávkou</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Garantované výnosy + dividendy</h3>
+                    <p>Garantované 4% ročně plus dodatečné dividendy dle výsledků fondu</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Bezpečnost investice</h3>
+                    <p>Investice kryté reálnými nemovitostmi s rostoucí hodnotou</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3>Profesionální správa</h3>
+                    <p>Zkušený tým spravuje celé portfolio za vás</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Nízká minimální investice</h3>
+                    <p>Začněte investovat již od 50 000 Kč</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Transparentní reporting</h3>
+                    <p>Pravidelné zprávy o výkonnosti vašich investic</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="investice" class="investment-section">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; color: #2d3748; margin-bottom: 1rem;">Spočítejte si váš potenciální výnos</h2>
+            <div class="investment-calculator">
+                <h3 style="margin-bottom: 2rem; color: #2d3748;">Investiční kalkulačka</h3>
+                <div>
+                    <label>Výše investice (Kč):</label>
+                    <input type="number" id="investment" class="calculator-input" value="100000" min="50000" step="10000">
+                </div>
+                <div>
+                    <label>Počet let:</label>
+                    <input type="number" id="years" class="calculator-input" value="5" min="1" max="20">
+                </div>
+                <div class="calculator-result">
+                    Váš garantovaný výnos po <span id="result-years">5</span> letech: <span id="result-amount">21 665</span> Kč
+                </div>
+                <p style="margin-top: 1rem; color: #4a5568;">Celková částka: <strong><span id="total-amount">121 665</span> Kč</strong></p>
+                <p style="margin-top: 0.5rem; color: #666; font-size: 0.9rem;"><em>+ dodatečné dividendy dle výsledků fondu</em></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontakt" class="contact-section">
+        <div class="container">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Kontaktujte nás</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">Jsme tu, abychom odpověděli na všechny vaše otázky</p>
+            
+            <div class="contact-form">
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label>Jméno a příjmení:</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefon:</label>
+                        <input type="tel">
+                    </div>
+                    <div class="form-group">
+                        <label>Předpokládaná výše investice:</label>
+                        <input type="text" placeholder="např. 100 000 Kč">
+                    </div>
+                    <div class="form-group">
+                        <label>Zpráva:</label>
+                        <textarea rows="4" placeholder="Máte nějaké otázky?"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Odeslat poptávku</button>
+                </form>
+            </div>
+            
+            <div style="margin-top: 3rem;">
+                <p><strong>📞 Telefon:</strong> +420 123 456 789</p>
+                <p><strong>📧 Email:</strong> info@soldanreal.cz</p>
+                <p><strong>📍 Adresa:</strong> Václavské náměstí 1, Praha 1</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Soldanreal Fond Realit. Všechna práva vyhrazena. | Investice do nemovitostí s péčí o vaše budoucnost</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Investment calculator
+        function updateCalculator() {
+            const investment = parseFloat(document.getElementById('investment').value) || 0;
+            const years = parseFloat(document.getElementById('years').value) || 0;
+            const guaranteedRate = 0.04; // 4% guaranteed annual return
+            
+            const guaranteedReturn = investment * Math.pow(1 + guaranteedRate, years);
+            const guaranteedProfit = guaranteedReturn - investment;
+            
+            document.getElementById('result-years').textContent = years;
+            document.getElementById('result-amount').textContent = Math.round(guaranteedProfit).toLocaleString('cs-CZ');
+            document.getElementById('total-amount').textContent = Math.round(guaranteedReturn).toLocaleString('cs-CZ');
+        }
+
+        document.getElementById('investment').addEventListener('input', updateCalculator);
+        document.getElementById('years').addEventListener('input', updateCalculator);
+
+        // Form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Děkujeme za váš zájem! Ozveme se vám do 24 hodin.');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'white';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.15)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Initialize calculator
+        updateCalculator();
+    </script>
+</body>
+</html>
